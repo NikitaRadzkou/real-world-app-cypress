@@ -1,49 +1,51 @@
+type Selector = Cypress.Chainable<JQuery<HTMLElement>>
+
 class Transaction {
-  get searchInput() {
+  private get searchInput(): Selector {
     return cy.get('[data-test=user-list-search-input]')
   }
 
-  get userList() {
+  private get userList(): Selector {
     return cy.get('[data-test=users-list]')
   }
 
-  get amountInput() {
+  private get amountInput(): Selector {
     return cy.get('[data-test=transaction-create-amount-input]')
   }
 
-  get addNoteInput() {
+  private get addNoteInput(): Selector {
     return cy.get('[data-test=transaction-create-description-input]')
   }
 
-  get payBtn() {
+  private get payBtn(): Selector {
     return cy.get('[data-test=transaction-create-submit-payment]')
   }
 
-  get requestBtn() {
+  private get requestBtn(): Selector {
     return cy.get('[data-test=transaction-create-submit-request]')
   }
 
-  get transactionSubmitted() {
+  private get transactionSubmitted(): Selector {
     return cy.get('.MuiAlert-message')
   }
 
-  typeContact(value) {
+  typeContact(value: string) {
     this.searchInput.type(value)
     return this
   }
 
-  typeAmount(amount) {
+  typeAmount(amount: string) {
     this.amountInput.type(amount)
     return this
   }
 
-  typeDesc(desc) {
+  typeDesc(desc: string) {
     this.addNoteInput.type(desc)
     return this
   }
 
   clickContact() {
-    this.userList.first().click()
+    this.userList.children().first().click()
     return this
   }
 
@@ -59,28 +61,8 @@ class Transaction {
     return this
   }
 
-  verifyResponseTransaction() {
-    cy.wait('@transaction').then(xhr => {
-      expect(xhr.method).to.eq('POST')
-      expect(xhr.requestBody.description).to.eq(
-        xhr.responseBody.transaction.description
-      )
-      expect(xhr.requestBody.senderId).to.eq(
-        xhr.responseBody.transaction.senderId
-      )
-      expect(xhr.requestBody.receiverId).to.eq(
-        xhr.responseBody.transaction.receiverId
-      )
-    })
-    return this
-  }
-
-  createServerTransaction() {
-    cy.server()
-    cy.route({
-      method: 'POST',
-      url: '/transactions',
-    }).as('transaction')
+  createInterceptTransaction() {
+    cy.intercept('POST', '/transactions').as('transaction')
     return this
   }
 }

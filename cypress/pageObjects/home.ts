@@ -1,38 +1,44 @@
+type Selector = Cypress.Chainable<JQuery<HTMLElement>>
+
 class Home {
-  get getStartedNextBtn() {
+  private get getStartedNextBtn(): Selector {
     return cy.get('[data-test=user-onboarding-next]')
   }
 
-  get bankNameAccountInput() {
+  private get bankNameAccountInput(): Selector {
     return cy.get('#bankaccount-bankName-input')
   }
 
-  get routingNumberInput() {
+  private get routingNumberInput(): Selector {
     return cy.get('#bankaccount-routingNumber-input')
   }
 
-  get accountNumber() {
+  private get accountNumber(): Selector {
     return cy.get('#bankaccount-accountNumber-input')
   }
 
-  get newTransactionBtn() {
+  private get newTransactionBtn(): Selector {
     return cy.get('[data-test=nav-top-new-transaction]')
   }
 
-  get saveBankAccountBtn() {
+  private get saveBankAccountBtn(): Selector {
     return cy.get('[data-test=bankaccount-submit]')
   }
 
-  get doneBankAccountBtn() {
+  private get doneBankAccountBtn(): Selector {
     return cy.get('[data-test=user-onboarding-next]')
   }
 
-  get logoutBtn() {
+  private get logoutBtn(): Selector {
     return cy.get('[data-test=sidenav-signout]')
   }
 
+  private get notificationsBtn(): Selector {
+    return cy.get('[data-test=sidenav-notifications]')
+  }
+
   homeVisit() {
-    cy.visit('/')
+    cy.visit('http://localhost:3000/')
     return this
   }
 
@@ -41,17 +47,17 @@ class Home {
     return this
   }
 
-  typeBankName(value) {
+  typeBankName(value: string) {
     this.bankNameAccountInput.type(value)
     return this
   }
 
-  typeRoutingNumber(value) {
+  typeRoutingNumber(value: string) {
     this.routingNumberInput.type(value)
     return this
   }
 
-  typeAccountNumber(value) {
+  typeAccountNumber(value: string) {
     this.accountNumber.type(value)
     return this
   }
@@ -78,6 +84,11 @@ class Home {
 
   clickLogoutBtn() {
     this.logoutBtn.click()
+    return this
+  }
+
+  clickNotificationsBtn() {
+    this.notificationsBtn.click()
     return this
   }
 }

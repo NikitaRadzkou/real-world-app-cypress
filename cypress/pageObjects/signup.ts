@@ -1,54 +1,56 @@
+type Selector = Cypress.Chainable<JQuery<HTMLElement>>
+
 class Signup {
-  get firstNameInput() {
+  private get firstNameInput(): Selector {
     return cy.get('[data-test=signup-first-name]')
   }
 
-  get lastNameInput() {
+  private get lastNameInput(): Selector {
     return cy.get('[data-test=signup-last-name]')
   }
 
-  get usernameInput() {
+  private get usernameInput(): Selector {
     return cy.get('[data-test=signup-username]')
   }
 
-  get passwordInput() {
+  private get passwordInput(): Selector {
     return cy.get('[data-test=signup-password]')
   }
 
-  get confirmPasswordInput() {
+  private get confirmPasswordInput(): Selector {
     return cy.get('[data-test=signup-confirmPassword]')
   }
 
-  get signUpBtn() {
+  private get signUpBtn(): Selector {
     return cy.get('[data-test=signup-submit]')
   }
 
   signupVisit() {
-    cy.visit('/signup')
+    cy.visit('http://localhost:3000/signup')
     return this
   }
 
-  typeFirstNameInput(value) {
+  typeFirstNameInput(value: string) {
     this.firstNameInput.type(value)
     return this
   }
 
-  typeLastNameInput(value) {
+  typeLastNameInput(value: string) {
     this.lastNameInput.type(value)
     return this
   }
 
-  typeUsernameInput(value) {
+  typeUsernameInput(value: string) {
     this.usernameInput.type(value)
     return this
   }
 
-  typePasswordInput(value) {
+  typePasswordInput(value: string) {
     this.passwordInput.type(value)
     return this
   }
 
-  typeConfirmPasswordInput(value) {
+  typeConfirmPasswordInput(value: string) {
     this.confirmPasswordInput.type(value)
     return this
   }

@@ -1,31 +1,33 @@
+type Selector = Cypress.Chainable<JQuery<HTMLElement>>
+
 class Signin {
-  get usernameInput() {
+  private get usernameInput(): Selector {
     return cy.get('#username')
   }
 
-  get passwordInput() {
+  private get passwordInput(): Selector {
     return cy.get('#password')
   }
 
-  get signinBtn() {
+  private get signinBtn(): Selector {
     return cy.get('[data-test=signin-submit]')
   }
 
-  get signUpLink() {
+  private get signUpLink(): Selector {
     return cy.get('[data-test=signup]')
   }
 
   signinVisit() {
-    cy.visit('/signin')
+    cy.visit('http://localhost:3000/signin')
     return this
   }
 
-  typeUsername(value) {
+  typeUsername(value: string) {
     this.usernameInput.type(value)
     return this
   }
 
-  typePassword(value) {
+  typePassword(value: string) {
     this.passwordInput.type(value)
     return this
   }

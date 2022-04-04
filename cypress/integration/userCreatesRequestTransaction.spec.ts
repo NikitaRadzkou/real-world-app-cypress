@@ -1,8 +1,9 @@
+import data from '../fixtures/data'
 import Signup from '../pageObjects/signup'
 import Signin from '../pageObjects/signin'
 import Home from '../pageObjects/home'
 import Transaction from '../pageObjects/transaction'
-import data from '../fixtures/data'
+import Notifications from '../pageObjects/notifications'
 
 describe('User creates request transaction', () => {
   before(() => {
@@ -41,7 +42,7 @@ describe('User creates request transaction', () => {
   })
 
   it('User creates request transaction', () => {
-    Transaction.createServerTransaction()
+    Transaction.createInterceptTransaction()
 
     Home.clickNewTransaction()
 
@@ -50,7 +51,17 @@ describe('User creates request transaction', () => {
       .typeDesc('For coffee')
       .clickRequestBtn()
       .verifyTransactionSubmitted()
-      .verifyResponseTransaction()
+    // .verifyResponseTransaction()
+
+    Home.homeVisit().clickLogoutBtn()
+
+    Signin.typeUsername(data.secondUsername)
+      .typePassword(data.secondPassword)
+      .clickSingin()
+
+    Home.clickNotificationsBtn()
+
+    Notifications.verifyNotificationId()
   })
 
   afterEach(() => {
