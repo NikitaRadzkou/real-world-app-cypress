@@ -1,0 +1,1 @@
+export type Selector = Cypress.Chainable<JQuery<HTMLElement>>

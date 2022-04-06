@@ -1,4 +1,4 @@
-type Selector = Cypress.Chainable<JQuery<HTMLElement>>
+import { Selector } from './../fixtures/types.d'
 
 class Signin {
   private get usernameInput(): Selector {
@@ -17,27 +17,27 @@ class Signin {
     return cy.get('[data-test=signup]')
   }
 
-  signinVisit() {
+  signinVisit(): this {
     cy.visit('http://localhost:3000/signin')
     return this
   }
 
-  typeUsername(value: string) {
+  typeUsername(value: string): this {
     this.usernameInput.type(value)
     return this
   }
 
-  typePassword(value: string) {
+  typePassword(value: string): this {
     this.passwordInput.type(value)
     return this
   }
 
-  clickSingin() {
+  clickSingin(): this {
     this.signinBtn.click()
     return this
   }
 
-  clickSignUpLink() {
+  clickSignUpLink(): this {
     this.signUpLink.click()
     return this
   }

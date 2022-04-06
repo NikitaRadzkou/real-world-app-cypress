@@ -1,4 +1,4 @@
-type Selector = Cypress.Chainable<JQuery<HTMLElement>>
+import { Selector } from './../fixtures/types.d'
 
 class Home {
   private get getStartedNextBtn(): Selector {
@@ -37,57 +37,57 @@ class Home {
     return cy.get('[data-test=sidenav-notifications]')
   }
 
-  homeVisit() {
+  homeVisit(): this {
     cy.visit('http://localhost:3000/')
     return this
   }
 
-  verifyHomeUrl() {
+  verifyHomeUrl(): this {
     cy.url().should('eq', 'http://localhost:3000/')
     return this
   }
 
-  typeBankName(value: string) {
+  typeBankName(value: string): this {
     this.bankNameAccountInput.type(value)
     return this
   }
 
-  typeRoutingNumber(value: string) {
+  typeRoutingNumber(value: string): this {
     this.routingNumberInput.type(value)
     return this
   }
 
-  typeAccountNumber(value: string) {
+  typeAccountNumber(value: string): this {
     this.accountNumber.type(value)
     return this
   }
 
-  clickGetStartedNextBtn() {
+  clickGetStartedNextBtn(): this {
     this.getStartedNextBtn.click()
     return this
   }
 
-  clickNewTransaction() {
+  clickNewTransaction(): this {
     this.newTransactionBtn.should('be.visible').click()
     return this
   }
 
-  clickSaveBankAccount() {
+  clickSaveBankAccount(): this {
     this.saveBankAccountBtn.click()
     return this
   }
 
-  clickDoneBankAccount() {
+  clickDoneBankAccount(): this {
     this.doneBankAccountBtn.click()
     return this
   }
 
-  clickLogoutBtn() {
+  clickLogoutBtn(): this {
     this.logoutBtn.click()
     return this
   }
 
-  clickNotificationsBtn() {
+  clickNotificationsBtn(): this {
     this.notificationsBtn.click()
     return this
   }

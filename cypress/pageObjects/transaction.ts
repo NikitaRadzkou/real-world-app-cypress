@@ -1,4 +1,4 @@
-type Selector = Cypress.Chainable<JQuery<HTMLElement>>
+import { Selector } from './../fixtures/types.d'
 
 class Transaction {
   private get searchInput(): Selector {
@@ -29,39 +29,39 @@ class Transaction {
     return cy.get('.MuiAlert-message')
   }
 
-  typeContact(value: string) {
+  typeContact(value: string): this {
     this.searchInput.type(value)
     return this
   }
 
-  typeAmount(amount: string) {
+  typeAmount(amount: string): this {
     this.amountInput.type(amount)
     return this
   }
 
-  typeDesc(desc: string) {
+  typeDesc(desc: string): this {
     this.addNoteInput.type(desc)
     return this
   }
 
-  clickContact() {
+  clickContact(): this {
     this.userList.children().first().click()
     return this
   }
 
-  clickRequestBtn() {
+  clickRequestBtn(): this {
     this.requestBtn.click()
     return this
   }
 
-  verifyTransactionSubmitted() {
+  verifyTransactionSubmitted(): this {
     this.transactionSubmitted
       .should('be.visible')
       .and('contain.text', 'Transaction Submitted!')
     return this
   }
 
-  createInterceptTransaction() {
+  createInterceptTransaction(): this {
     cy.intercept('POST', '/transactions').as('transaction')
     return this
   }

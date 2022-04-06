@@ -1,5 +1,5 @@
 class Notifications {
-  verifyNotificationId() {
+  verifyNotificationId(): this {
     cy.request('http://localhost:3001/notifications').as('notification')
 
     cy.get('@notification').then((res: any): any => {
